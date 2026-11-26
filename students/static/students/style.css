@@ -1,0 +1,383 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background: #172554;
+    color: white;
+    padding: 30px 20px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 45px;
+}
+
+.sidebar a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 9px;
+    margin-bottom: 10px;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    font-size: 28px;
+}
+
+.header p {
+    color: #64748b;
+    margin-top: 7px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 35px;
+}
+
+.card {
+    background: white;
+    padding: 26px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+}
+
+.card h3 {
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    font-size: 32px;
+    color: #2563eb;
+}
+
+.table-container {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+    overflow-x: auto;
+}
+
+.table-container h2 {
+    margin-bottom: 22px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th,
+td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+    color: #64748b;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 170px;
+        padding: 20px 12px;
+    }
+
+    .main-content {
+        padding: 18px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+}
+
+/* ==============================
+   FORM PAGES
+============================== */
+
+.main-content h1 {
+    color: #172554;
+    margin-bottom: 10px;
+}
+
+.main-content > p {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+form {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+    max-width: 750px;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+form input[type="text"],
+form input[type="email"],
+form input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.main-content a {
+    color: #2563eb;
+    margin-right: 10px;
+}
+
+.form-group p,
+form > p {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* ==============================
+   SEARCH PAGE
+============================== */
+
+.main-content table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.main-content table th {
+    background: #f8fafc;
+}
+
+.main-content table td a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.main-content table td a:hover {
+    text-decoration: underline;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+@media (max-width: 700px) {
+    form {
+        padding: 18px;
+    }
+
+    .main-content {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 650px;
+    }
+}
+
+
+body {
+    background: #e0f2fe !important;
+}
+
+form {
+    background: white !important;
+    padding: 30px !important;
+    border-radius: 15px !important;
+    max-width: 700px !important;
+}
+
+/* ADD STUDENT PAGE FIX */
+
+body:has(form) {
+    background: #f1f5f9 !important;
+}
+
+body:has(form) .main-content {
+    padding: 35px !important;
+}
+
+body:has(form) form {
+    background: #ffffff !important;
+    padding: 30px !important;
+    border-radius: 14px !important;
+    max-width: 750px !important;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08) !important;
+}
+
+body:has(form) form input,
+body:has(form) form textarea {
+    padding: 12px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+}
+
+
+/* LOGIN PAGE */
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.10);
+}
+
+.login-card h1 {
+    text-align: center;
+    color: #172554;
+    margin-bottom: 10px;
+}
+
+.login-card > p {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.login-card .form-group {
+    margin-bottom: 20px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #dc2626;
+    background: #fee2e2;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+.logout-button {
+    background: #dc2626;
+    color: white;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.logout-button:hover {
+    background: #b91c1c;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

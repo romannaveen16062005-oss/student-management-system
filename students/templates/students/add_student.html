@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+</head>
+<body>
+
+<div class="main-content">
+
+    <h1>Add New Student</h1>
+    <p>Enter the student details below.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <p>Please correct the errors below.</p>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Save Student</button>
+        <a href="/">Cancel</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>
