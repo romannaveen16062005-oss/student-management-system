@@ -12,10 +12,20 @@
 
 <div class="main-content">
 
-    <h1>Student List</h1>
-    <p>Search and manage registered students.</p>
+    <!-- Page Header -->
+    <div class="header">
+        <div>
+            <h1>Student List</h1>
+            <p>Search and manage registered students.</p>
+        </div>
 
-    <form method="GET">
+        <a href="{% url 'add_student' %}" class="add-button">
+            + Add Student
+        </a>
+    </div>
+
+    <!-- Search Form -->
+    <form method="GET" class="search-form">
         <input
             type="text"
             name="search"
@@ -23,58 +33,79 @@
             value="{{ query }}"
         >
 
-        <button type="submit">Search</button>
+        <button type="submit" class="add-button">Search</button>
+
         <a href="{% url 'student_list' %}">Clear</a>
     </form>
 
-    <br>
+    <!-- Student Table -->
+    <div class="table-container">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Register Number</th>
-                <th>Student Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Department</th>
-                <th>Course</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+        <div class="table-header">
+            <div>
+                <h2>Registered Students</h2>
+                <p>View and manage all student records.</p>
+            </div>
+        </div>
 
-        <tbody>
-            {% for student in students %}
-            <tr>
-                <td>{{ student.register_number }}</td>
-                <td>{{ student.full_name }}</td>
-                <td>{{ student.email }}</td>
-                <td>{{ student.phone }}</td>
-                <td>{{ student.department }}</td>
-                <td>{{ student.course }}</td>
-                <td>
-                    <a href="{% url 'edit_student' student.id %}">
-                        Edit
-                    </a>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Register Number</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Department</th>
+                        <th>Course</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-                    <a href="{% url 'delete_student' student.id %}">
-                        Delete
-                    </a>
-                </td>
-            </tr>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.register_number }}</td>
+                        <td>{{ student.full_name }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.phone }}</td>
+                        <td>{{ student.department }}</td>
+                        <td>{{ student.course }}</td>
 
-            {% empty %}
-            <tr>
-                <td colspan="7">No students found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                        <td class="action-buttons">
+                            <a
+                                href="{% url 'edit_student' student.id %}"
+                                class="edit-link"
+                            >
+                                Edit
+                            </a>
 
-    <br>
+                            <a
+                                href="{% url 'delete_student' student.id %}"
+                                class="delete-link"
+                            >
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
 
-    <a href="/">Back to Dashboard</a>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            No students found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <a href="{% url 'add_student' %}">+ Add Student</a>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer">
+        <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+    </div>
 
 </div>
 

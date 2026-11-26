@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
+    <title>StudentHub | Dashboard</title>
     <link rel="stylesheet" href="{% static 'students/style.css' %}">
 </head>
 
@@ -22,10 +22,27 @@
 
         <p class="menu-label">MAIN MENU</p>
 
-        <a href="/" class="active">Dashboard</a>
-        <a href="/admin/students/student/">Students</a>
-        <a href="{% url 'add_student' %}">Add Student</a>
-        <a href="/admin/">Admin Panel</a>
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}" class="active">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="{% url 'student_list' %}">
+                <span class="nav-icon">♧</span>
+                Students
+            </a>
+
+            <a href="{% url 'add_student' %}">
+                <span class="nav-icon">+</span>
+                Add Student
+            </a>
+
+            <a href="/admin/">
+                <span class="nav-icon">⚙</span>
+                Admin Panel
+            </a>
+        </nav>
 
         <div class="sidebar-footer">
             Student Management System
@@ -37,28 +54,33 @@
     <!-- Main Content -->
     <main class="main-content">
 
+        <!-- Header -->
         <header class="header">
-            <div>
+
+            <div class="header-title">
                 <h1>Dashboard</h1>
-                <p>Welcome to Student Management System</p>
+                <p>Welcome back! Here's your student overview.</p>
             </div>
 
-            
-<div class="profile">
-    <div class="profile-icon">A</div>
+            <div class="profile">
 
-    <div>
-        <strong>{{ request.user.username }}</strong>
-        <small>System Admin</small>
-    </div>
+                <div class="profile-icon">
+                    {{ request.user.username|first|upper }}
+                </div>
 
-    <form method="POST" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit" class="logout-button">
-            Logout
-        </button>
-    </form>
-</div>
+                <div class="profile-details">
+                    <strong>{{ request.user.username }}</strong>
+                    <small>System Admin</small>
+                </div>
+
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">
+                        Logout
+                    </button>
+                </form>
+
+            </div>
 
         </header>
 
@@ -67,16 +89,20 @@
 
             <div class="card">
                 <div class="card-icon blue">ST</div>
-                <h3>Total Students</h3>
-                <h2>{{ total_students }}</h2>
-                <p>Registered students</p>
+                <div class="card-content">
+                    <h3>Total Students</h3>
+                    <h2>{{ total_students }}</h2>
+                    <p>Registered students</p>
+                </div>
             </div>
 
             <div class="card">
                 <div class="card-icon purple">DP</div>
-                <h3>Total Departments</h3>
-                <h2>{{ total_departments }}</h2>
-                <p>Active departments</p>
+                <div class="card-content">
+                    <h3>Total Departments</h3>
+                    <h2>{{ total_departments }}</h2>
+                    <p>Active departments</p>
+                </div>
             </div>
 
         </section>
@@ -85,6 +111,7 @@
         <section class="table-container">
 
             <div class="table-header">
+
                 <div>
                     <h2>Recent Students</h2>
                     <p>Latest registered students</p>
@@ -94,47 +121,61 @@
                    href="{% url 'add_student' %}">
                     + Add Student
                 </a>
+
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Register Number</th>
-                        <th>Student Name</th>
-                        <th>Email</th>
-                        <th>Department</th>
-                        <th>Course</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Register Number</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Course</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    {% for student in recent_students %}
-                    <tr>
-                        <td>
-                            <strong>{{ student.register_number }}</strong>
-                        </td>
-                        <td>{{ student.full_name }}</td>
-                        <td>{{ student.email }}</td>
-                        <td>{{ student.department }}</td>
-                        <td>{{ student.course }}</td>
-                        <td>
-                            <a href="{% url 'edit_student' student.id %}">
-                                Edit
-                            </a>
+                    <tbody>
+                        {% for student in recent_students %}
+                        <tr>
+                            <td>
+                                <strong>{{ student.register_number }}</strong>
+                            </td>
 
-                            <a href="{% url 'delete_student' student.id %}">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="6">No students registered yet.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                            <td>{{ student.full_name }}</td>
+                            <td>{{ student.email }}</td>
+                            <td>{{ student.department }}</td>
+                            <td>{{ student.course }}</td>
+
+                            <td class="action-buttons">
+                                <a class="edit-link"
+                                   href="{% url 'edit_student' student.id %}">
+                                    Edit
+                                </a>
+
+                                <a class="delete-link"
+                                   href="{% url 'delete_student' student.id %}">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                No students registered yet.
+                                <a href="{% url 'add_student' %}">
+                                    Add your first student
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
 
         </section>
 
